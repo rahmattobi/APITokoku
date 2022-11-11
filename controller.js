@@ -18,3 +18,15 @@ exports.user = function(req,res){
         }
     });
 };
+
+//menampilkan semua data pada database
+exports.userwithid = function(req,res){
+    let id = req.params.id;
+    connection.query('SELECT * FROM user WHERE id = ?',[id], function (error, rows, fields) {
+        if (error) {
+            connection.log(error);
+        }else{
+            response.ok(rows,res)
+        }
+    });
+};

@@ -1,18 +1,16 @@
-var mysql = required('mysql');
+var mysql = require('mysql');
 
-// koneksi database
-
-const conn = mysql.createConnection({
-    host:'localhost',
-    user:'root',
-    password:'',
-    database:'tokoku'
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "tokoku"
 });
 
-conn.connect((err)=> {
-    if (err) throw err;
-    console.log('Mysql Terkoneksi');
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
 });
 
 
-module.exports = conn;
+module.exports = con;

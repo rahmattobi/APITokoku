@@ -62,34 +62,51 @@ exports.login = function(req, res) {
                     expiresIn: 1440
                 });
                 id_user = rows[0].id;
+                email = rows[0].email;
+                nama = rows[0].nama;
 
                 let data = {
                     id_user: id_user,
-                    access_token: token,
+                    email: email,
+                    nama: nama,
+                    // access_token: token,
                 }
 
-                let query = 'INSERT INTO ?? SET ?';
-                let table = ['akses_token'];
-
-                query = mysql.format(query,table);
-                connection.query(query,data,function(error,rows) {
-                    if (error) {
-                        console.log(error);
-                    } else {
-                        res.json({
+                res.json({
                             success:true,
                             message:'token JWT tergenerate!',
                             token:token,
                             currUser:data.id_user,
+                            data: {email:email,nama:nama}
                         });
-                    }
-                });
+
+                // menyimpan data token ke db 
+                
+                // let query = 'INSERT INTO ?? SET ?';
+                // let table = ['akses_token'];
+
+                // query = mysql.format(query,table);
+                
+                // connection.query(data,function(error,rows) {
+                //     if (error) {
+                //         console.log(error);
+                //     } else {
+                //         res.json({
+                //             success:true,
+                //             message:'token JWT tergenerate!',
+                //             token:token,
+                //             currUser:data.id_user,
+                //             data: {email:email,nama:nama}
+                //         });
+                //     }
+                // });
             } else{
                 res.json({"error":true,"Message":"Email atau Password salah!"});
             }
         }
     });
 }
+
 
 
 
